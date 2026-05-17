@@ -2,48 +2,20 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src https://www.youtube-nocookie.com" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>404 — not found</title>
 <meta name="robots" content="noindex" />
 <link rel="icon" href="/favicon.ico" />
 <link rel="stylesheet" href="/assets/style.css" />
-<style>
-  body { padding: 24px; }
-  .nf {
-    width: min(520px, 100%); background: var(--panel);
-    border: 1px solid var(--border); border-radius: var(--radius);
-    box-shadow: var(--shadow); padding: 30px;
-  }
-  .nf .role {
-    font-family: var(--mono); font-size: 11px; letter-spacing: .09em;
-    color: var(--muted); margin-bottom: 10px;
-  }
-  .nf .role::before { content: "◆ "; color: var(--accent); }
-  .nf p { margin: 0 0 14px; }
-  .nf code {
-    font-family: var(--mono); font-size: 13px;
-    background: var(--panel-2); border: 1px solid var(--border);
-    padding: 1px 6px; border-radius: 6px; color: var(--accent);
-  }
-  .nf a {
-    font-family: var(--mono); font-size: 13px; color: var(--text);
-    text-decoration: none; border: 1px solid var(--border);
-    border-radius: 8px; padding: 7px 13px; display: inline-block;
-    transition: border-color .15s, color .15s;
-  }
-  .nf a:hover { color: var(--accent); border-color: var(--accent); }
-</style>
 </head>
-<body>
+<body class="nf-body">
   <main class="nf">
     <div class="role">agent</div>
     <p>That route doesn't resolve — there's nothing at <code id="path">this path</code>.</p>
     <p>The conversation is back home, though.</p>
     <a href="/">› return to kamal.agent</a>
   </main>
-  <script>
-    document.getElementById("path").textContent =
-      location.pathname.length > 1 ? location.pathname : "this path";
-  </script>
+  <script src="/assets/404.js" defer></script>
 </body>
 </html>

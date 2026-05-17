@@ -390,3 +390,30 @@ html[data-theme="light"] .prompt__send { color: #fff; }
   * { animation: none !important; scroll-behavior: auto !important; }
   .caret { display: none; }
 }
+
+/* ---------- 404 page ------------------------------------------------------- */
+
+.nf-body { padding: 24px; }
+.nf {
+  width: min(520px, 100%); background: var(--panel);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 30px;
+}
+.nf .role {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .09em;
+  color: var(--muted); margin-bottom: 10px;
+}
+.nf .role::before { content: "◆ "; color: var(--accent); }
+.nf p { margin: 0 0 14px; }
+.nf code {
+  font-family: var(--mono); font-size: 13px;
+  background: var(--panel-2); border: 1px solid var(--border);
+  padding: 1px 6px; border-radius: 6px; color: var(--accent);
+}
+.nf a {
+  font-family: var(--mono); font-size: 13px; color: var(--text);
+  text-decoration: none; border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; display: inline-block;
+  transition: border-color .15s, color .15s;
+}
+.nf a:hover { color: var(--accent); border-color: var(--accent); }

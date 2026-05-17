@@ -156,7 +156,7 @@
         "[Scholar](https://scholar.google.com/citations?user=tC3td8cAAAAJ) · " +
         "[X](https://twitter.com/kamalgupta09) · " +
         "[LinkedIn](https://www.linkedin.com/in/kamalgupta09)\n\n" +
-        "Research? Email or Scholar."
+        "Best way to reach me: **email** or **X**."
     },
 
     cv: {
@@ -218,14 +218,14 @@
     return m;
   }
 
-  function escapeHTML(s) {
-    return s.replace(/[&<>"]/g, function (c) {
-      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+  // Build author lines as DOM nodes (no innerHTML) — bold "K. Gupta".
+  function appendAuthors(node, authorStr) {
+    authorStr.split(/(K\. Gupta)/g).forEach(function (part) {
+      if (!part) return;
+      node.appendChild(
+        part === "K. Gupta" ? el("b", null, part)
+                            : document.createTextNode(part));
     });
-  }
-
-  function boldName(authorStr) {
-    return escapeHTML(authorStr).replace(/K\. Gupta/g, "<b>K. Gupta</b>");
   }
 
   function isExternal(href) { return /^https?:\/\//.test(href); }
@@ -256,20 +256,20 @@
       var body = el("div", "card__body");
       var primary = p.web || p.paper;
       var t = el("a", "card__title", p.title);
-      t.href = primary; t.target = "_blank"; t.rel = "noopener";
+      t.href = primary; t.target = "_blank"; t.rel = "noopener noreferrer";
       body.appendChild(t);
       body.appendChild(el("span", "card__venue", p.venue));
       body.appendChild(el("p", "card__desc", p.desc));
 
       var au = el("p", "card__authors");
-      au.innerHTML = boldName(p.authors);
+      appendAuthors(au, p.authors);
       body.appendChild(au);
 
       var links = el("div", "card__links");
       [["Web", p.web], ["Paper", p.paper], ["Code", p.code]].forEach(function (pair) {
         if (!pair[1]) return;
         var a = el("a", null, pair[0]);
-        a.href = pair[1]; a.target = "_blank"; a.rel = "noopener";
+        a.href = pair[1]; a.target = "_blank"; a.rel = "noopener noreferrer";
         links.appendChild(a);
       });
       body.appendChild(links);
@@ -296,7 +296,7 @@
       var li = document.createElement("li");
       if (r[2]) {
         var a = el("a", "where", r[0]);
-        a.href = r[2]; a.target = "_blank"; a.rel = "noopener";
+        a.href = r[2]; a.target = "_blank"; a.rel = "noopener noreferrer";
         li.appendChild(a);
       } else {
         li.appendChild(el("span", "where", r[0]));
@@ -314,9 +314,9 @@
         x: "https://x.com/Tesla_Optimus/status/1705728820693668189",
         thumb: "/assets/optimus-2023.jpg" },
       { date: "2024", t: "Reliable, useful tasks for real-world use cases",
-        yt: "DrNcXgoFv20" },
+        yt: "DrNcXgoFv20", thumb: "/assets/optimus-2024.jpg" },
       { date: "Oct 2024", t: "Public demo — 20+ robots interacting, dancing, serving drinks",
-        yt: "agrfdLcE8qc" },
+        yt: "agrfdLcE8qc", thumb: "/assets/optimus-2024-demo.jpg" },
       { date: "May 2025", t: "Scaling with human data",
         x: "https://x.com/Tesla_Optimus/status/1925047336256078302",
         thumb: "/assets/optimus-2025.jpg" }
@@ -328,16 +328,14 @@
       a.className = "vid" + (o.x ? " vid--x" : "");
       a.href = o.yt ? "https://www.youtube.com/watch?v=" + o.yt : o.x;
       a.target = "_blank";
-      a.rel = "noopener";
+      a.rel = "noopener noreferrer";
 
-      var thumbSrc = o.yt
-        ? "https://img.youtube.com/vi/" + o.yt + "/hqdefault.jpg"
-        : o.thumb;
-      if (thumbSrc) {
+      if (o.thumb) {
         var th = new Image();
         th.loading = "lazy";
+        th.decoding = "async";
         th.alt = o.t;
-        th.src = thumbSrc;
+        th.src = o.thumb; // self-hosted — no third-party request
         a.appendChild(th);
       }
       a.appendChild(el("span", "vid__play", "▶"));
@@ -408,7 +406,7 @@
     if (seg.t === "a") {
       var a = el("a");
       a.href = seg.href;
-      if (isExternal(seg.href)) { a.target = "_blank"; a.rel = "noopener"; }
+      if (isExternal(seg.href)) { a.target = "_blank"; a.rel = "noopener noreferrer"; }
       return a;
     }
     return document.createTextNode("");
@@ -445,7 +443,7 @@
     return new Promise(function (resolve) {
       if (reduceMotion) return resolve();
       var t = el("div", "thinking");
-      t.innerHTML = "<i></i><i></i><i></i>";
+      t.appendChild(el("i")); t.appendChild(el("i")); t.appendChild(el("i"));
       body.appendChild(t);
       scrollDown();
       var wait = 220 + Math.random() * 240;

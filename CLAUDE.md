@@ -14,7 +14,8 @@ Files that *are* the site:
 - `index.html` — shell, `<head>` (meta/OG/JSON-LD), chips, composer
 - `assets/style.css` — all styles (CSS variables; dark default + light)
 - `assets/app.js` — all content **and** logic (no separate data files)
-- `404.html`, `.nojekyll`, `favicon.ico`, `robots.txt`, empty `CNAME`
+- `404.html` + `assets/404.js` (its only script — kept external on purpose)
+- `.nojekyll`, `favicon.ico`, `robots.txt`, empty `CNAME`
 - `assets/` images: `og.png`, `avatar.jpg`, `optimus-*.jpg`
 - `images/` project teasers + generated `*.mp4`/`*.jpg` posters
 - `pubs/kamal_gupta_cv.pdf` — **content source of truth** for bio/roles/pubs
@@ -41,6 +42,13 @@ Files that *are* the site:
 - Scroll: each new question is pinned ~16px from the top; never auto-jump to
   the bottom of a long reply. Auto-anchor stops once the user scrolls.
 - `classify()` maps free-text → intent by keywords.
+- **Security/CSP**: both pages ship a strict `Content-Security-Policy` meta
+  (`script-src 'self'`, `style-src 'self'`, no `unsafe-inline`). So: **no
+  inline `<script>`/`<style>` or `style=`/`innerHTML`** — build DOM nodes,
+  put CSS in `style.css`, JS in `assets/*.js`. (Inline JSON-LD is fine; CSP
+  doesn't gate `application/ld+json`.) Third-party media is self-hosted
+  (`optimus-*.jpg`); only the click-to-load `youtube-nocookie` iframe is
+  remote (allowed via `frame-src`). External links use `noopener noreferrer`.
 - **Composer input is currently disabled**: the free-text `<form>` is
   commented out in `index.html` (chips-only nav). The JS is guarded
   (`if (form)`) and `classify()` is kept, so restoring = un-comment that
