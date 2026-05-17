@@ -38,6 +38,14 @@
   /* ---- content ------------------------------------------------------- */
 
   var PROJECTS = [
+    { title: "Measuring Style Similarity in Diffusion Models",
+      venue: "ECCV 2024",
+      desc: "Style descriptors that quantify stylistic similarity and trace a generated image's style back to its training data.",
+      authors: "G. Somepalli, A. Gupta, K. Gupta, S. Palta, M. Goldblum, J. Geiping, A. Shrivastava, T. Goldstein",
+      media: "/images/csd.jpg",
+      paper: "https://arxiv.org/abs/2404.01292",
+      code: "https://github.com/learn2phoenix/CSD" },
+
     { title: "ASIC — Aligning Sparse in-the-wild Image Collections",
       venue: "ICCV 2023",
       desc: "Learning dense correspondences for long-tail, in-the-wild image collections.",
