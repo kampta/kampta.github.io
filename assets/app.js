@@ -130,7 +130,7 @@
   var ANSWERS = {
     about: {
       text:
-        "**Kamal Gupta** — Staff Research Scientist on the [Tesla Optimus](https://www.tesla.com/AI) team.\n\n" +
+        "**Kamal Gupta** — building Optimus at [Tesla AI](https://www.tesla.com/AI).\n\n" +
         "I build agents that **see**, **reason**, and **act** — extending large multimodal models into the physical world.\n\n" +
         "**PhD in AI**, [University of Maryland](https://www.umd.edu). Past: [Google](https://research.google), " +
         "[NVIDIA](https://github.com/NVlabs), [Amazon AI Labs](https://www.amazon.science).\n\n" +
@@ -144,7 +144,7 @@
     },
 
     experience: {
-      text: "Vision, ML & robotics — from research to Optimus:",
+      text: "Machine Learning, Computer Vision, Robotics:",
       render: renderTimeline
     },
 
