@@ -131,7 +131,8 @@
     about: {
       text:
         "**Kamal Gupta** — building Optimus at [Tesla AI](https://www.tesla.com/AI).\n\n" +
-        "I build agents that **see**, **reason**, and **act** — extending large multimodal models into the physical world.\n\n" +
+        "Less chatbot, more robot: I build AI agents that **see**, **reason**, " +
+        "and **act** in the physical world.\n\n" +
         "**PhD in AI**, [University of Maryland](https://www.umd.edu). Past: [Google](https://research.google), " +
         "[NVIDIA](https://github.com/NVlabs), [Amazon AI Labs](https://www.amazon.science).\n\n" +
         "Lately — Optimus work and recent research:",
