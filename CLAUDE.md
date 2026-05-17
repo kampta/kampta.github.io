@@ -16,7 +16,7 @@ Files that *are* the site:
 - `assets/app.js` — all content **and** logic (no separate data files)
 - `404.html` + `assets/404.js` (its only script — kept external on purpose)
 - `.nojekyll`, `favicon.ico`, `robots.txt`, empty `CNAME`
-- `assets/` images: `og.png`, `avatar.jpg`, `optimus-*.jpg`
+- `assets/` images: `og.jpg`, `avatar.jpg`, `optimus-*.jpg`
 - `images/` project teasers + generated `*.mp4`/`*.jpg` posters
 - `pubs/kamal_gupta_cv.pdf` — **content source of truth** for bio/roles/pubs
 - `asic/` — standalone ASIC project subsite, linked from research
@@ -56,7 +56,7 @@ Files that *are* the site:
 - **Accent color** is the CSS var `--accent` / `--accent-soft` / `--accent-2`
   in `assets/style.css` (per `[data-theme]`). Current: emerald `#45d68b`
   dark / `#0f9d58` light. The OG card **bakes the accent in** — if you change
-  it, regenerate `assets/og.png` (the temp `_og.html` must use the new hex).
+  it, regenerate `assets/og.jpg` (the temp `_og.html` must use the new hex).
 
 ## Regenerating assets (requires: ffmpeg, yt-dlp, poppler, Google Chrome)
 
@@ -78,16 +78,18 @@ yt-dlp --skip-download --write-thumbnail --convert-thumbnails jpg -o /tmp/t.%(ex
 sips -s format jpeg -s formatOptions 80 -Z 720 /tmp/t.jpg --out assets/optimus-YYYY.jpg
 ```
 
-OG social card (`assets/og.png`, 1200×630): write a temp `assets/_og.html`
+OG social card (`assets/og.jpg`, 1200×630): write a temp `assets/_og.html`
 styled like the site (font `/System/Library/Fonts/SFNSMono.ttf`) plus a temp
 `assets/_ogphoto.jpg`, then:
 ```
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new \
   --disable-gpu --hide-scrollbars --force-device-scale-factor=1 \
-  --window-size=1200,630 --screenshot=assets/og.png "file://$PWD/assets/_og.html"
+  --window-size=1200,630 --screenshot=/tmp/og.png "file://$PWD/assets/_og.html"
+sips -s format jpeg -s formatOptions 86 /tmp/og.png --out assets/og.jpg
 rm assets/_og.html assets/_ogphoto.jpg
 ```
-ffmpeg here lacks `drawtext`, so Chrome is the text-rendering path.
+Chrome only writes PNG (ffmpeg here lacks `drawtext`), so render to a temp
+PNG then `sips` it to the final `assets/og.jpg` (~100 KB vs ~280 KB PNG).
 
 ## Run & deploy
 
