@@ -570,7 +570,10 @@
       try { history.replaceState(null, "", "#" + intent); } catch (e) {}
     }
     var answer = ANSWERS[intent] || ANSWERS.fallback;
-    agentMessage(answer).then(function () { busy = false; input.focus(); });
+    agentMessage(answer).then(function () {
+      busy = false;
+      if (input) input.focus();
+    });
   }
 
   chips.addEventListener("click", function (e) {
@@ -580,13 +583,16 @@
     ask(intent, intent);
   });
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    var q = input.value.trim();
-    if (!q) return;
-    input.value = "";
-    ask(classify(q), q);
-  });
+  // Guarded: present only if the composer <form> is restored in index.html.
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var q = input.value.trim();
+      if (!q) return;
+      input.value = "";
+      ask(classify(q), q);
+    });
+  }
 
   // tap / key during streaming = skip to the end
   stream.addEventListener("click", function () {
@@ -623,7 +629,7 @@
     agentMessage(ANSWERS.about).then(function () {
       busy = false;
       if (route && route !== "about" && route !== "news") ask(route, route);
-      else input.focus();
+      else if (input) input.focus();
     });
   }, reduceMotion ? 0 : 360);
 })();

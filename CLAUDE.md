@@ -41,6 +41,14 @@ Files that *are* the site:
 - Scroll: each new question is pinned ~16px from the top; never auto-jump to
   the bottom of a long reply. Auto-anchor stops once the user scrolls.
 - `classify()` maps free-text → intent by keywords.
+- **Composer input is currently disabled**: the free-text `<form>` is
+  commented out in `index.html` (chips-only nav). The JS is guarded
+  (`if (form)`) and `classify()` is kept, so restoring = un-comment that
+  `<form>` block; no JS change needed.
+- **Accent color** is the CSS var `--accent` / `--accent-soft` / `--accent-2`
+  in `assets/style.css` (per `[data-theme]`). Current: emerald `#45d68b`
+  dark / `#0f9d58` light. The OG card **bakes the accent in** — if you change
+  it, regenerate `assets/og.png` (the temp `_og.html` must use the new hex).
 
 ## Regenerating assets (requires: ffmpeg, yt-dlp, poppler, Google Chrome)
 
