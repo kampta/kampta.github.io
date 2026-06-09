@@ -18,7 +18,7 @@ Files that *are* the site:
 - `.nojekyll`, `favicon.ico`, `robots.txt`, empty `CNAME`
 - `assets/` images: `og.jpg`, `avatar.jpg`, `optimus-*.jpg`
 - `images/` project teasers + generated `*.mp4`/`*.jpg` posters
-- `pubs/kamal_gupta_cv.pdf` — **content source of truth** for bio/roles/pubs
+- `pubs/kamalgupta_cv.pdf` — **content source of truth** for bio/roles/pubs
 - `asic/` — standalone ASIC project subsite, linked from research
 
 ## Where content is edited (all in `assets/app.js`)
@@ -60,7 +60,7 @@ Files that *are* the site:
 
 ## Regenerating assets (requires: ffmpeg, yt-dlp, poppler, Google Chrome)
 
-Read the CV: `pdftotext -layout pubs/kamal_gupta_cv.pdf -`
+Read the CV: `pdftotext -layout pubs/kamalgupta_cv.pdf -`
 
 Avatar from a square headshot:
 `sips -s format jpeg -s formatOptions 82 -Z 256 SRC.jpg --out assets/avatar.jpg`

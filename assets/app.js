@@ -168,7 +168,7 @@
 
     cv: {
       text:
-        "[CV (PDF)](/pubs/kamal_gupta_cv.pdf) — opens in a new tab.\n\n" +
+        "[CV (PDF)](/pubs/kamalgupta_cv.pdf) — opens in a new tab.\n\n" +
         "Tesla Optimus · PhD in AI, UMD · 15+ papers at CVPR / ICCV / ECCV / NeurIPS / ICLR."
     },
 
